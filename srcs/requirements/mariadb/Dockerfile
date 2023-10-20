@@ -12,4 +12,4 @@ RUN chmod 777 ./script.sh
 
 ENTRYPOINT ["./script.sh"]
 
-CMD ["mysqld"]
+CMD ["mysqld_safe"]
