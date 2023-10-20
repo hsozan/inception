@@ -1,18 +1,21 @@
-//makefile for inception
+all:
+	@mkdir -p $(HOME)/data/wordpress
+	@mkdir -p $(HOME)/data/mariadb
+	@docker-compose -f ./srcs/docker-compose.yml up
 
-all : up
-
-up : 
-	@docker-compose -f ./srcs/docker-compose.yml up -d
-
-down : 
+down:
 	@docker-compose -f ./srcs/docker-compose.yml down
 
-stop : 
-	@docker-compose -f ./srcs/docker-compose.yml stop
+re:
+	@docker-compose -f srcs/docker-compose.yml up --build
 
-start : 
-	@docker-compose -f ./srcs/docker-compose.yml start
+clean:
+	@docker stop $$(docker ps -qa);\
+	docker rm $$(docker ps -qa);\
+	docker rmi -f $$(docker images -qa);\
+	docker volume rm $$(docker volume ls -q);\
+	docker network rm $$(docker network ls -q);\
+	rm -rf $(HOME)/data/wordpress
+	rm -rf $(HOME)/data/mariadb
 
-status : 
-	@docker ps
+.PHONY: all re down clean
