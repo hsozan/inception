@@ -6,7 +6,7 @@
 #    By: hsozan <hsozan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/01 14:18:11 by sahafid           #+#    #+#              #
-#    Updated: 2023/10/21 02:11:15 by hsozan           ###   ########.fr        #
+#    Updated: 2023/10/21 02:15:13 by hsozan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@
 all : up
 
 up : 
+	@mkdir /home/hakan/Desktop/inception/srcs/wordpress
+	@mkdir /home/hakan/Desktop/inception/srcs/mariadb
 	@docker-compose -f ./srcs/docker-compose.yml up
 
 down : 
