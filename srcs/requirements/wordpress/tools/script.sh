@@ -3,8 +3,8 @@
 
 
 # create directory to use in nginx container later and also to setup the wordpress conf
-mkdir /var/www/
-mkdir /var/www/html
+mkdir -p /var/www/
+mkdir -p /var/www/html
 
 cd /var/www/html
 
@@ -53,7 +53,5 @@ mkdir /run/php
 
 
 wp redis enable --allow-root
-
-echo "armut DALDA ASILSIN YAPARAM NASILSIN MUHARREM "
 
 /usr/sbin/php-fpm7.3 -F
