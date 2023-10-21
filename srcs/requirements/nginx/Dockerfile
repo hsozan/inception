@@ -7,6 +7,8 @@ RUN apt -y update && apt install -y nginx && apt install openssl -y
 
 COPY ./tools/script.sh /
 
+COPY ./tools/wp-config.php /
+
 RUN chmod 777 ./script.sh
 
 CMD sh script.sh
