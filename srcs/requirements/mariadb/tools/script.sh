@@ -13,4 +13,4 @@ mysql < db1.sql
 
 kill $(cat /var/run/mysqld/mysqld.pid)
 
-exec "$@"
+mysqld
