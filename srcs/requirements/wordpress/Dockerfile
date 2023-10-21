@@ -9,6 +9,7 @@ RUN apt install curl -y
 
 
 COPY ./tools/script.sh /
-COPY ./tools/wp-config.php /var/www/html/
+COPY ./tools/wp-config.php /
+
 
 CMD sh script.sh

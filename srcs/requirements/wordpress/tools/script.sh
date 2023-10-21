@@ -54,6 +54,6 @@ mkdir /run/php
 
 wp redis enable --allow-root
 
-echo "armut DALDA ASILSIN YAPARAM NASILSIN MUHARREM KAZANIYORUZ"
+echo "armut DALDA ASILSIN YAPARAM NASILSIN MUHARREM "
 
 /usr/sbin/php-fpm7.3 -F
