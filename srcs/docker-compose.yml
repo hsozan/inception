@@ -1,4 +1,4 @@
-version: "3.5"
+version: "3"
 
 networks:
   app-network:
@@ -22,6 +22,19 @@ volumes:
       device: /$HOME/data/mariadb
 
 services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wp:/var/www/html
+    networks:
+      - app-network
+    restart: always
+  
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
@@ -31,7 +44,7 @@ services:
       - db:/var/lib/mysql
     networks:
       - app-network
-    restart: unless-stopped
+    restart: always
 
   wordpress:
     container_name: wordpress
@@ -44,17 +57,4 @@ services:
       - wp:/var/www/html
     networks:
       - app-network
-    restart: unless-stopped
-
-  nginx:
-    container_name: nginx
-    build: ./requirements/nginx
-    ports:
-      - "443:443"
-    depends_on:
-      - wordpress
-    volumes:
-      - wp:/var/www/html
-    networks:
-      - app-network
-    restart: unless-stopped
+    restart: always
