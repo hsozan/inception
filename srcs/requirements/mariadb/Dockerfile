@@ -10,4 +10,4 @@ COPY ./tools/script.sh .
 
 RUN chmod 777 ./script.sh
 
-CMD bash script.sh
+CMD sh script.sh
