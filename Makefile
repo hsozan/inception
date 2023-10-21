@@ -1,32 +1,25 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: hsozan <hsozan@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/01 14:18:11 by sahafid           #+#    #+#              #
-#    Updated: 2023/10/21 02:52:13 by hsozan           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-
-
-all : up
-
-up : 
-	@mkdir -p ./srcs/wordpress
-	@mkdir -p ./srcs/mariadb
+# -f: --file
+# -q: --quiet
+# -a: --all
+# $$: escape $ for shell
+all:
+	@mkdir -p $(HOME)/data/wordpress
+	@mkdir -p $(HOME)/data/mariadb
 	@docker-compose -f ./srcs/docker-compose.yml up
 
-down :
+down:
 	@docker-compose -f ./srcs/docker-compose.yml down
 
-stop :
-	@docker-compose -f ./srcs/docker-compose.yml stop
+re:
+	@docker-compose -f srcs/docker-compose.yml up --build
 
-start : 
-	@docker-compose -f ./srcs/docker-compose.yml start
+clean:
+	@docker stop $$(docker ps -qa);\
+	docker rm $$(docker ps -qa);\
+	docker rmi -f $$(docker images -qa);\
+	docker volume rm $$(docker volume ls -q);\
+	docker network rm $$(docker network ls -q);\
+	rm -rf $(HOME)/data/wordpress
+	rm -rf $(HOME)/data/mariadb
 
-status : 
-	@docker ps
+.PHONY: all re down clean

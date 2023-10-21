@@ -1,14 +1,15 @@
 FROM debian:buster
 
+RUN apt-get update && apt-get install -y nginx openssl
 
-RUN apt -y update && apt install -y nginx && apt install openssl -y
+EXPOSE 443
 
-# COPY ./conf/default /etc/nginx/sites-available/
+COPY ./conf/default/ /etc/nginx/sites-enabled/default
+COPY ./tools/nginx_start.sh /var/www
 
-COPY ./tools/script.sh /
+RUN chmod +x /var/www/nginx_start.sh
 
-COPY ./tools/wp-config.php /
+ENTRYPOINT ["var/www/nginx_start.sh"]
 
-RUN chmod 777 ./script.sh
+CMD ["nginx", "-g", "daemon off;"]
 
-CMD sh script.sh
