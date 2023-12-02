@@ -13,6 +13,8 @@ re: fclean all
 
 fclean: down
 	$(DOCKER) down -v --remove-orphans
-	sudo rm -rf $(USER_HOME)/data/*
+	sudo rm -rf $(HOME)/data/wordpress
+	sudo rm -rf $(HOME)/data/mysql
 
-.PHONY: all down re fclean
+.PHONY: all down re clean fclean
+#docker stop $(docker ps -qa); docker rm $(docker ps -qa); docker rmi -f $(docker images -qa); docker volume rm $(docker volume ls -q); docker network rm $(docker network ls -q) 2>/dev/null
